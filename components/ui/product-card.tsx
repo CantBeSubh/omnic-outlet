@@ -5,14 +5,20 @@ import Image from "next/image";
 import Currency from "./currency";
 import { Button } from "./button";
 import { Expand, ShoppingCart } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface ProductCardProps {
     data: Product
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
+    const router = useRouter()
+    const handleClick = () => {
+        router.push(`/product/${data.id}`)
+    }
+
     return (
-        <Card>
+        <Card onClick={handleClick} className="cursor-pointer">
             <CardHeader >
                 <div className="w-[250px] h-[250px] relative group">
                     <Image
