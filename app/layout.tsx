@@ -3,6 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Urbanist } from 'next/font/google'
 import Navbar from '@/components/navbar'
+import { Toaster } from 'react-hot-toast'
 
 const urbanist = Urbanist({ subsets: ['latin'] })
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={urbanist.className}>
         <Navbar />
         {children}
+        <Toaster />
         <Footer />
       </body>
     </html>
