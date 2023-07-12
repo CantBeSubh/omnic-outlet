@@ -6,6 +6,7 @@ import Currency from "./currency";
 import { Button } from "./button";
 import { Expand, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
+import Modal from "../modal";
 
 interface ProductCardProps {
     data: Product
@@ -18,9 +19,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
     }
 
     return (
-        <Card onClick={handleClick} className="cursor-pointer">
+        <Card className="cursor-pointer">
             <CardHeader >
-                <div className="w-[250px] h-[250px] relative group">
+                <div className="aspect-square relative group">
                     <Image
                         src={data.Image[0].url}
                         alt={data.name}
@@ -35,13 +36,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
                         transition-opacity duration-300 p-2
                         backdrop-blur-[5px] 
                         `}>
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={() => alert("Expand")}
+                        <Modal
+                            product={data}
                         >
-                            <Expand size={20} className="text-gray-600" />
-                        </Button>
+                            <Button
+                                variant="outline"
+                                size="icon"
+                                onClick={() => { }}
+                            >
+                                <Expand size={20} className="text-gray-600" />
+                            </Button>
+                        </Modal>
+
                         <Button
                             variant="outline"
                             size="icon"
@@ -54,7 +60,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
                 <CardTitle>{data.name}</CardTitle>
                 <CardDescription>{data.category.name}</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent onClick={handleClick}>
                 <Currency value={data.price} />
             </CardContent>
         </Card>
