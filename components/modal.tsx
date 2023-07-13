@@ -20,7 +20,7 @@ const Modal: React.FC<ModalProps> = ({ children, product }) => {
     const cart = useCart()
     const onAddtoCard: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation()
-        cart.addItem(data)
+        cart.addItem(product)
     }
     return (
         <Dialog>
@@ -37,7 +37,8 @@ const Modal: React.FC<ModalProps> = ({ children, product }) => {
                                     <div className="aspect-square w-full">
                                         <div className="aspect-square  relative ">
                                             <Image
-                                                src={product.Image[0].url}
+                                                // @ts-ignore
+                                                src={product.images[0].url}
                                                 alt="product"
                                                 fill
                                                 className=" border-4 rounded-3xl"

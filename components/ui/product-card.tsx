@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation";
 import Modal from "../modal";
 import useCart from "@/hooks/use-cart";
 import { MouseEventHandler } from "react";
+import { useEffect, useState } from "react";
+
 
 interface ProductCardProps {
     data: Product
@@ -17,6 +19,14 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
     const router = useRouter()
     const cart = useCart()
+    const [isMounted, setIsMounted] = useState(false)
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, [])
+    if (!isMounted) return null;
+
+
     const handleClick = () => {
         router.push(`/product/${data.id}`)
     }
@@ -32,7 +42,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
                 <div className="aspect-square relative group">
 
                     <Image
-                        src={data.Image[0].url}
+                        // @ts-ignore
+                        src={data.images[0].url}
                         alt={data.name}
                         className="rounded-md border "
                         fill
