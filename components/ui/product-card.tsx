@@ -38,10 +38,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
     }
 
     return (
-        <Card onDoubleClick={handleClick} className="cursor-pointer" >
+        <Card className="group" >
             <CardHeader >
-                <div className="aspect-square relative group">
-
+                <div className="aspect-square relative cursor-pointer" onClick={handleClick}>
                     <Image
                         // @ts-ignore
                         src={data.images[0].url}
@@ -49,39 +48,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
                         className="rounded-md border "
                         fill
                     />
-
-                    <div
-                        className={`
-                        absolute inset-0 bg-opacity-20 
-                        flex justify-center items-end gap-x-2 
-                        opacity-0 group-hover:opacity-100 
-                        transition-opacity duration-300 p-2
-                        backdrop-blur-[5px]
-                        z-10
-                        `}>
-                        <div>
-
-                            <Modal
-                                product={data}
-                            >
-                                <Button
-                                    variant="outline"
-                                    size="icon"
-                                    onClick={() => { }}
-                                >
-                                    <Expand size={20} className="text-gray-600" />
-                                </Button>
-                            </Modal>
-                        </div>
-
-                        <Button
-                            variant="outline"
-                            size="icon"
-                            onClick={onAddtoCard}
-                        >
-                            <ShoppingCart size={20} className="text-gray-600" />
-                        </Button>
-                    </div>
                 </div>
                 <CardTitle>{data.name}</CardTitle>
                 <CardDescription>
@@ -93,8 +59,35 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
                     >{data.color.name}</Badge>
                 </CardDescription>
             </CardHeader>
-            <CardContent >
+            <CardContent className="flex justify-between" >
                 <Currency value={data.price} />
+                <div className="flex space-x-2
+                                bg-opacity-20 
+                                justify-center items-end gap-x-2 
+                                opacity-0 group-hover:opacity-100 
+                                transition-opacity duration-300 p-2
+                                z-10
+                                ">
+                    <Modal
+                        product={data}
+                    >
+                        <Button
+                            variant="outline"
+                            size="icon"
+                            onClick={() => { }}
+                        >
+                            <Expand size={20} className="text-gray-600" />
+                        </Button>
+                    </Modal>
+                    <Button
+                        variant="outline"
+                        size="icon"
+                        onClick={onAddtoCard}
+                    >
+                        <ShoppingCart size={20} className="text-gray-600" />
+                    </Button>
+                </div>
+
             </CardContent>
         </Card>
 

@@ -87,7 +87,7 @@ const NavMenuItem = ({ route }: { route: any }) => {
                 </li>
                 {
                     route.sizes.map((size: Size) => (
-                        <ListItem href={`${route.href}?sizeId=${size.id}`} title={size.name}>
+                        <ListItem href={`${route.href}?sizeId=${size.id}`} title={size.name} key={size.id}>
                             {size.name} items
                         </ListItem>
                     ))
@@ -112,14 +112,15 @@ const MainNav: React.FC<MainNavProps> = ({ categories, sizes, billboards }) => {
     return (
         <NavigationMenu>
             <NavigationMenuList>
-                {routes.map((route: any) => (<NavMenuItem route={route} />))}
-
+                {routes.map((route: any) => (<NavMenuItem route={route} key={route.id} />))}
                 <NavigationMenuItem>
                     <Link href="https://overwatch.blizzard.com/" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                             Play Overwatch 2 <ArrowUpRight size={16} className="inline-block ml-1" />
                         </NavigationMenuLink>
                     </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
                 </NavigationMenuItem>
             </NavigationMenuList>
         </NavigationMenu>
