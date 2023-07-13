@@ -23,7 +23,7 @@ const NavbarActions: React.FC<NavbarActionsProps> = () => {
 
     return (
         <div className="ml-auto flex items-center gap-x-4">
-            <ModeToggle />
+            {/* <ModeToggle /> */}
             <Button variant="default" className="flex items-center" onClick={() => router.push("/cart")}>
                 <ShoppingBag size={20} />
                 <span className="ml-2 text-l font-medium text-white dark:text-black">{cart.items.length}</span>

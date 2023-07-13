@@ -49,7 +49,7 @@ ListItem.displayName = "ListItem"
 const NavMenuItem = ({ route }: { route: any }) => {
     return (<NavigationMenuItem>
         <NavigationMenuTrigger>
-            <a href={route.href} className={route.active ? "text-black" : "text-gray-500"}>
+            <a href={route.href} className={route.active ? "text-black dark:text-white" : "text-gray-500"}>
                 {route.label}
             </a>
         </NavigationMenuTrigger>

@@ -58,7 +58,7 @@ const Filter: React.FC<FilterProps> = ({
     const filteredData = data.filter(item => !catName || item.value === catName)
     return (
         <div className="mb-8">
-            <h3 className="text-lg font-semibold">
+            <h3 className="text-lg font-semibold dark:text-black">
                 {name}
             </h3>
             <hr className="my-4" />

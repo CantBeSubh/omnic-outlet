@@ -21,12 +21,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={urbanist.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-          <Navbar />
-          {children}
-          <Toaster />
-          <Footer />
-        </ThemeProvider>
+        <Navbar />
+        {children}
+        <Toaster />
+        <Footer />
       </body>
     </html>
   )

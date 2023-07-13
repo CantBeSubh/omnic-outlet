@@ -46,7 +46,7 @@ const Modal: React.FC<ModalProps> = ({ children, product }) => {
                                         </div>
                                     </div>
                                     <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-                                        <h1 className="text-3xl font-bold text-gray-900">{product.name}</h1>
+                                        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{product.name}</h1>
                                         <div className="mt-3 flex items-end justify-between">
                                             <p className="text-2xl text-gray-900">
                                                 <Currency value={product?.price} />

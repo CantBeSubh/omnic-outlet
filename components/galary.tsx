@@ -9,7 +9,7 @@ interface GallaryProps {
 
 const Gallary: React.FC<GallaryProps> = ({ images }) => {
     return (
-        <Tabs defaultValue={images[0].id} className="aspect-square w-full">
+        <Tabs defaultValue={images[0].id} className="aspect-square w-ful">
             <div className="mb-10 ">
                 {images.map((image) => (
                     <TabsContent key={image.id} value={image.id}>
