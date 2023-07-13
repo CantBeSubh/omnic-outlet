@@ -10,6 +10,7 @@ import Modal from "../modal";
 import useCart from "@/hooks/use-cart";
 import { MouseEventHandler } from "react";
 import { useEffect, useState } from "react";
+import { Badge } from "./badge";
 
 
 interface ProductCardProps {
@@ -83,7 +84,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
                     </div>
                 </div>
                 <CardTitle>{data.name}</CardTitle>
-                <CardDescription>{data.category.name}</CardDescription>
+                <CardDescription>
+                    <Badge
+                        variant="outline"
+                        style={{
+                            backgroundColor: data.color.value
+                        }}
+                    >{data.color.name}</Badge>
+                </CardDescription>
             </CardHeader>
             <CardContent >
                 <Currency value={data.price} />

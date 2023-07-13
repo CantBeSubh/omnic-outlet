@@ -51,7 +51,7 @@ const Filter: React.FC<FilterProps> = ({
         catch (err) { console.log(err) }
         finally {
             setLoading(false);
-            toast.success('Success!', { id: toastId });
+            toast.success('Please wait!', { id: toastId });
         }
 
     }
