@@ -45,14 +45,14 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({ params, searchParams 
                         <div className="hidden lg:block">
                             <Filter
                                 valueKey="sizeId"
-                                name="Sizes"
+                                name="Hero"
                                 // @ts-ignore
                                 data={sizes}
                                 catName={category.name}
                             />
                             <Filter
                                 valueKey="colorId"
-                                name="Colors"
+                                name="Tier"
                                 // @ts-ignore
                                 data={colors}
                             />
