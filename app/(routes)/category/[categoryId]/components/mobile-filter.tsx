@@ -13,11 +13,13 @@ import { Button } from "@/components/ui/button";
 interface MobileFiltersProps {
     sizes: Size[],
     colors: Color[],
+    catName?: string
 }
 
 const MobileFilters: React.FC<MobileFiltersProps> = ({
     sizes,
-    colors
+    colors,
+    catName = ''
 }) => {
     const [open, setOpen] = useState(false);
 
@@ -42,6 +44,7 @@ const MobileFilters: React.FC<MobileFiltersProps> = ({
                                     valueKey="sizeId"
                                     name="Sizes"
                                     data={sizes}
+                                    catName={catName}
                                 />
                                 <Filter
                                     valueKey="colorId"
