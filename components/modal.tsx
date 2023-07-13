@@ -15,9 +15,9 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ children, product }) => {
+    const cart = useCart()
 
     if (!product) return null
-    const cart = useCart()
     const onAddtoCard: MouseEventHandler<HTMLButtonElement> = (e) => {
         e.stopPropagation()
         cart.addItem(product)
