@@ -6,6 +6,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Color, Size } from "@/types";
+import { toast } from "react-hot-toast";
+import { useState } from "react";
 
 interface FilterProps {
     data: (Size | Color)[];
@@ -18,29 +20,38 @@ const Filter: React.FC<FilterProps> = ({
     name,
     valueKey,
 }) => {
+    const [loading, setLoading] = useState(false);
     const searchParams = useSearchParams();
     const router = useRouter();
 
     const selectedValue = searchParams.get(valueKey);
 
     const onClick = (id: string) => {
-        const current = qs.parse(searchParams.toString());
+        const toastId = toast.loading('Loading...');
+        try {
+            setLoading(true);
+            const current = qs.parse(searchParams.toString());
+            const query = {
+                ...current,
+                [valueKey]: id
+            };
 
-        const query = {
-            ...current,
-            [valueKey]: id
-        };
+            if (current[valueKey] === id) {
+                query[valueKey] = null;
+            }
 
-        if (current[valueKey] === id) {
-            query[valueKey] = null;
+            const url = qs.stringifyUrl({
+                url: window.location.href,
+                query,
+            }, { skipNull: true });
+            router.push(url, { scroll: false, })
+        }
+        catch (err) { console.log(err) }
+        finally {
+            setLoading(false);
+            toast.success('Success!', { id: toastId });
         }
 
-        const url = qs.stringifyUrl({
-            url: window.location.href,
-            query,
-        }, { skipNull: true });
-
-        router.push(url);
     }
 
     return (
@@ -50,17 +61,18 @@ const Filter: React.FC<FilterProps> = ({
             </h3>
             <hr className="my-4" />
             <div className="flex flex-wrap gap-2">
-                {data.map((filter) => (
-                    <div key={filter.id} className="flex items-center">
+                {data.map((item) => (
+                    <div key={item.id} className="flex items-center">
                         <Button
+                            disabled={loading}
                             variant="outline"
                             className={cn(
                                 '',
-                                selectedValue === filter.id && 'bg-black text-white'
+                                selectedValue === item.id && 'bg-black text-white'
                             )}
-                            onClick={() => onClick(filter.id)}
+                            onClick={() => onClick(item.id)}
                         >
-                            {filter.name}
+                            {item.name}
                         </Button>
                     </div>
                 ))}
