@@ -11,7 +11,7 @@ export const revalidate = 0
 
 const HomePage: React.FC<HomePageProps> = async () => {
     const products = await getProducts({ isFeatured: "true" })
-    const billboards = await getBillboard("de6264cc-28a9-4116-8d28-2a276c9f007a")
+    const billboards = await getBillboard("3b588479-f3cb-403d-8520-b9c3e262398a")
 
     return (
         <Container>
