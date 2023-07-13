@@ -48,6 +48,7 @@ const CategoryPage: React.FC<CategoryPageProps> = async ({ params, searchParams 
                                 name="Sizes"
                                 // @ts-ignore
                                 data={sizes}
+                                catName={category.name}
                             />
                             <Filter
                                 valueKey="colorId"

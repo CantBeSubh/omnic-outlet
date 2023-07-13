@@ -13,12 +13,14 @@ interface FilterProps {
     data: (Size | Color)[];
     name: string;
     valueKey: string;
+    catName?: string;
 };
 
 const Filter: React.FC<FilterProps> = ({
     data,
     name,
     valueKey,
+    catName = ''
 }) => {
     const [loading, setLoading] = useState(false);
     const searchParams = useSearchParams();
@@ -53,7 +55,7 @@ const Filter: React.FC<FilterProps> = ({
         }
 
     }
-
+    const filteredData = data.filter(item => !catName || item.value === catName)
     return (
         <div className="mb-8">
             <h3 className="text-lg font-semibold">
@@ -61,21 +63,24 @@ const Filter: React.FC<FilterProps> = ({
             </h3>
             <hr className="my-4" />
             <div className="flex flex-wrap gap-2">
-                {data.map((item) => (
-                    <div key={item.id} className="flex items-center">
-                        <Button
-                            disabled={loading}
-                            variant="outline"
-                            className={cn(
-                                '',
-                                selectedValue === item.id && 'bg-black text-white'
-                            )}
-                            onClick={() => onClick(item.id)}
-                        >
-                            {item.name}
-                        </Button>
-                    </div>
-                ))}
+                {filteredData.map((item) => {
+
+                    return (
+                        <div key={item.id} className="flex items-center">
+                            <Button
+                                disabled={loading}
+                                variant="outline"
+                                className={cn(
+                                    '',
+                                    selectedValue === item.id && 'bg-black text-white'
+                                )}
+                                onClick={() => onClick(item.id)}
+                            >
+                                {item.name}
+                            </Button>
+                        </div>
+                    )
+                })}
             </div>
         </div>
     );
