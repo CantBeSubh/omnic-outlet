@@ -1,50 +1,3 @@
-
-
-// const MainNav: React.FC<MainNavProps> = ({ data }) => {
-//     const pathname = usePathname()
-
-//     const routes = data.map((route: any) => ({
-//         href: `/category/${route.id}`,
-//         label: route.name,
-//         active: pathname === `/category/${route.id}`
-//     }))
-
-
-//     return (
-//         // <nav className="mx-6 flex items-center space-x-4 lg:space-x-6">
-//         <NavigationMenu>
-//             <NavigationMenuList>
-//                 <NavigationMenuItem>
-//                     <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-//                     <NavigationMenuContent>
-//                         <NavigationMenuLink>Link</NavigationMenuLink>
-//                     </NavigationMenuContent>
-//                 </NavigationMenuItem>
-//                 <NavigationMenuItem>
-//                     <NavigationMenuTrigger>Item One</NavigationMenuTrigger>
-//                     <NavigationMenuContent>
-//                         <NavigationMenuLink>Link</NavigationMenuLink>
-//                     </NavigationMenuContent>
-//                 </NavigationMenuItem>
-//             </NavigationMenuList>
-
-//             {routes.map((route: any) => (
-//                 <Link
-//                     key={route.href}
-//                     href={route.href}
-//                     className={cn(
-//                         "text-sm font-medium transition-colors hover:text-black",
-//                         route.active ? "text-black" : "text-gray-500"
-//                     )}
-//                 >
-//                     {route.label}
-//                 </Link>
-//             ))}
-//         </NavigationMenu>
-
-//     );
-// }
-
 "use client"
 
 import * as React from "react"
@@ -62,7 +15,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Billboard, Category, Size } from "@/types";
 import { usePathname } from "next/navigation"
-import getCategory from "@/actions/get-category"
+import { ArrowUpRight } from "lucide-react"
 
 interface MainNavProps {
     categories: Category[]
@@ -94,7 +47,6 @@ const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWit
 ListItem.displayName = "ListItem"
 
 const NavMenuItem = ({ route }: { route: any }) => {
-    const pathname = usePathname()
     return (<NavigationMenuItem>
         <NavigationMenuTrigger>
             <a href={route.href} className={route.active ? "text-black" : "text-gray-500"}>
@@ -160,16 +112,12 @@ const MainNav: React.FC<MainNavProps> = ({ categories, sizes, billboards }) => {
     return (
         <NavigationMenu>
             <NavigationMenuList>
-                {/* <NavMenuItem />
-                <NavMenuItem />
-                <NavMenuItem /> 
-                */}
                 {routes.map((route: any) => (<NavMenuItem route={route} />))}
 
                 <NavigationMenuItem>
-                    <Link href="/docs" legacyBehavior passHref>
+                    <Link href="https://overwatch.blizzard.com/" legacyBehavior passHref>
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Documentation
+                            Play Overwatch 2 <ArrowUpRight size={16} className="inline-block ml-1" />
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
