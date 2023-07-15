@@ -17,6 +17,15 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
     const suggestedProducts = await getProducts({
         categoryId: product.category.id,
     })
+    const sProducts = suggestedProducts.sort((a, b) => a.name.localeCompare(b.name)).map((product) => {
+        // @ts-ignore
+        // const { Image, ...rest } = product
+        // return {
+        //     ...rest,
+        //     images: Image
+        // }
+        return product
+    })
 
     return (
         <div className="bg-white">
@@ -31,7 +40,8 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
                         </div>
                     </div>
                     <Separator className="my-10" />
-                    <ProductList title="Related Products" items={suggestedProducts} />
+                    {/* @ts-ignore */}
+                    <ProductList title="Related Products" items={sProducts} />
                 </div>
             </Container>
         </div>

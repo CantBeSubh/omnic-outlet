@@ -11,6 +11,7 @@ import useCart from "@/hooks/use-cart";
 import { MouseEventHandler } from "react";
 import { useEffect, useState } from "react";
 import { Badge } from "./badge";
+import { toast } from "react-hot-toast";
 
 
 interface ProductCardProps {
@@ -29,6 +30,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
 
 
     const handleClick = () => {
+        toast.success("Loading...")
         router.push(`/product/${data.id}`)
     }
 
@@ -36,7 +38,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
         e.stopPropagation()
         cart.addItem(data)
     }
-
     return (
         <Card className="group" >
             <CardHeader >
