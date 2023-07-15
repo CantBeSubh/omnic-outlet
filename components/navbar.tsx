@@ -4,6 +4,7 @@ import MainNav from "./main-nav";
 import getCategories from "@/actions/get-categories";
 import NavbarActions from "./navbar-actions";
 import getSizes from "@/actions/get-sizes";
+import MobileMainNav from "./mobile-main-nav";
 
 export const revalidate = 0
 
@@ -17,6 +18,7 @@ const Navbar = async () => {
                     <Link href="/" className="ml-4 flex lg:ml-0 gap-x-2 mr-6">
                         <p className="font-bold text-xl">OMNIC<span className="text-orange-500">OUTLET</span></p>
                     </Link>
+                    <MobileMainNav categories={categories} />
                     {/* @ts-ignore */}
                     <MainNav categories={categories} sizes={sizes} />
                     <NavbarActions />

@@ -16,11 +16,30 @@ import {
 import { Billboard, Category, Size } from "@/types";
 import { usePathname } from "next/navigation"
 import { ArrowUpRight } from "lucide-react"
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
+
 
 interface MainNavProps {
     categories: Category[]
     sizes: Size[]
     billboards: Billboard[]
+}
+
+const decription: { [key: string]: string } = {
+    "Genji": "Genji Shimada is a Japanese cyborg ninja who is a member of the Shimada clan, a group of assassins. He is also the younger brother of Hanzo, who is the heir to the clan.",
+    "Hanzo": "Hanzo Shimad is a Japanese archer and assassin who is a member of the Shimada clan, a group of assassins. He is also the older brother of Genji, who he believed to be dead after he supposedly killed him.",
+    "Sombra": "Sombra is a notorious hacker who has hidden within the shadows to find a global conspiracy that she once encountered as a child.",
+    "Moira": "Moira is an Irish geneticist and former head of the notorious Blackwatch. She is an expert in the field of genetics, searching for a way to rewrite the fundamental building blocks of life.",
+    "Lucio": "Lucio grew up in Rio de Janeiro, in a poor and crowded favela that was hit hard by the financial upheaval following the Omnic Crisis. As Brazil began the long process of recovery, he wanted to find a way to lift the spirits of those around him.",
+    "Kiriko ": "Kiriko Takemura is a Japanese climatologist and adventurer who is a member of Overwatch. She is the daughter of Mina Liao, one of the six founding members of Overwatch.",
+    "Junker Queen": "The Junker Queen is the leader of the Junkers, a group of scavengers who reside in the Australian Outback. She is the ruler of Junkertown, a former omnium that was destroyed in the Omnic Crisis.",
+    "Reinhardt": "Reinhardt Wilhelm styles himself as a champion of a bygone age, who lives by the knightly codes of valor, justice, and courage.",
+    "Ramattra": "Ramattra is a member of the Shambali, a group of omnic monks who seek spiritual enlightenment. She is a close friend of Tekhartha Mondatta, the Shambali's leader.",
 }
 
 const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWithoutRef<"a">>(({ className, title, children, ...props }, ref) => {
@@ -49,7 +68,7 @@ ListItem.displayName = "ListItem"
 const NavMenuItem = ({ route }: { route: any }) => {
     return (<NavigationMenuItem>
         <NavigationMenuTrigger>
-            <a href={route.href} className={route.active ? "text-black dark:text-white" : "text-gray-500"}>
+            <a href={route.href} className={route.active ? "text-black dark:text-white border-b" : "text-gray-500 border-b border-transparent"}>
                 {route.label}
             </a>
         </NavigationMenuTrigger>
@@ -88,7 +107,21 @@ const NavMenuItem = ({ route }: { route: any }) => {
                 {
                     route.sizes.map((size: Size) => (
                         <ListItem href={`${route.href}?sizeId=${size.id}`} title={size.name} key={size.id}>
-                            {size.name} items
+                            <TooltipProvider delayDuration={0.5} disableHoverableContent>
+                                <Tooltip>
+                                    <TooltipTrigger>
+                                        <div className="line-clamp-2 text-left">
+                                            {decription[size.name] || size.name}
+                                        </div>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <div className="flex items-center justify-center flex-col">
+                                            <div className="text-sm font-medium leading-none">{size.name}</div>
+                                            <div className="max-w-sm">{decription[size.name] || size.name}</div>
+                                        </div>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
                         </ListItem>
                     ))
                 }
@@ -110,7 +143,7 @@ const MainNav: React.FC<MainNavProps> = ({ categories, sizes, billboards }) => {
     }))
 
     return (
-        <NavigationMenu>
+        <NavigationMenu className="hidden lg:block">
             <NavigationMenuList>
                 {routes.map((route: any) => (<NavMenuItem route={route} key={route.id} />))}
                 <NavigationMenuItem>
